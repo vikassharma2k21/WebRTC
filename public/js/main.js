@@ -15,9 +15,8 @@ const PeerConnection = (function () {
     const createPeerConnection = () => {
         const config = {
             iceServers: [
-                {
-                    urls: 'stun:stun.l.google.com:19302'
-                }
+                { urls: "stun:stun.l.google.com:19302" },
+                { urls: "turn:relay1.expressturn.com", username: "webrtc", credential: "turnpassword" }
             ]
         };
         peerConnection = new RTCPeerConnection();
