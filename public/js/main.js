@@ -27,9 +27,16 @@ const PeerConnection = (function () {
             peerConnection.addTrack(track, localStream);
         })
         // listen to remote stream and add to peer connection
-        peerConnection.ontrack = function (event) {
-            remoteVideo.srcObject = event.streams[0];
-        }
+        // peerConnection.ontrack = function (event) {
+        //     remoteVideo.srcObject = event.streams[0];
+        // }
+        peerConnection.ontrack = (event) => {
+            console.log("Received remote track:", event.streams[0]);
+            if (!remoteVideo.srcObject) {
+                remoteVideo.srcObject = event.streams[0];
+            }
+        };
+
         // listen for ice candidate
         peerConnection.onicecandidate = function (event) {
             if (event.candidate) {
